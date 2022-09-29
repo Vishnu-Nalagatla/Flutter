@@ -12,7 +12,6 @@ class ProductsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsData = Provider.of<ProductsProvider>(context);
     final products = showFavs ? productsData.favoriteItems : productsData.items;
-    print("000000000000 ${products}");
     return products.isNotEmpty
         ? GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -23,7 +22,6 @@ class ProductsGrid extends StatelessWidget {
             ),
             itemCount: products.length,
             itemBuilder: (ctx, i) {
-              print("1111111111111111");
               // Us the ChangeNotifierProvider.value() when it is a List or Grid.
               // cause it will be mostly useful in those Array.
               return ChangeNotifierProvider.value(

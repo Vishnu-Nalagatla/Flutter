@@ -1,3 +1,4 @@
+import 'package:e_commerce_shop/providers/cart_provider.dart';
 import 'package:e_commerce_shop/providers/product.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,6 @@ class ProductsProvider with ChangeNotifier {
   }
 
   List<Product> get items {
-    print(">>>>>>>>>>>>>>>>>>${_items[0].isFavorite}");
     return [..._items];
   }
 
@@ -50,8 +50,20 @@ class ProductsProvider with ChangeNotifier {
     return _items.where((product) => product.isFavorite).toList();
   }
 
-  // void add(Product product) {
-  //   // _items.add(product);
-  //   notifyListeners();
-  // }
+  void addNewProduct(Product product) {
+    final newProduct = Product(
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+    );
+    _items.add(newProduct);
+    notifyListeners();
+  }
+
+  void deleteProduct(String id) {
+    _items.removeWhere((prod) => prod.id == id);
+    notifyListeners();
+  }
 }

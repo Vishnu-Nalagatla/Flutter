@@ -33,7 +33,6 @@ class CartProvider with ChangeNotifier {
   }
 
   void addItem(String productId, String title, double price) {
-    print("999999999999999999999999999");
     if (_cartItems.containsKey(productId)) {
       _cartItems.update(
         productId,
@@ -54,6 +53,26 @@ class CartProvider with ChangeNotifier {
           price: price,
         ),
       );
+    }
+    notifyListeners();
+  }
+
+  void removeSingleItem(String id) {
+    if (!_cartItems.containsKey(id)) {
+      return;
+    }
+    if (_cartItems[id]!.quantity > 1) {
+      _cartItems.update(
+        id,
+        (exValue) => CartItemClass(
+          productId: exValue.productId,
+          title: exValue.title,
+          quantity: exValue.quantity - 1,
+          price: exValue.price,
+        ),
+      );
+    } else {
+      _cartItems.remove(id);
     }
     notifyListeners();
   }

@@ -1,6 +1,8 @@
+import 'package:e_commerce_shop/practice/custom_dropdown.dart';
 import 'package:e_commerce_shop/providers/cart_provider.dart';
 import 'package:e_commerce_shop/providers/orders_provider.dart';
 import 'package:e_commerce_shop/providers/products_provider.dart';
+import 'package:e_commerce_shop/screens/UserProducts/user_products_screen.dart';
 import 'package:e_commerce_shop/screens/cart/cart_screen.dart';
 import 'package:e_commerce_shop/screens/orders/orders_screen.dart';
 import 'package:e_commerce_shop/screens/products/product_details_screen.dart';
@@ -36,11 +38,14 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.deepOrange,
           fontFamily: "Lato",
         ),
-        home: ProductsOverViewScreen(),
+        // home: const UserProductsScreen(),
+        // home: const CustomDropdown(),
+        home: const ProductsOverViewScreen(),
         routes: {
-          ProductDetailsScreen.routeName: (ctx) => ProductDetailsScreen(),
-          CartScreen.routeName: (ctx) => CartScreen(),
-          OrdersScreen.routeName: (ctx) => OrdersScreen(),
+          ProductDetailsScreen.routeName: (ctx) => const ProductDetailsScreen(),
+          CartScreen.routeName: (ctx) => const CartScreen(),
+          OrdersScreen.routeName: (ctx) => const OrdersScreen(),
+          UserProductsScreen.routeName: (ctx) => const UserProductsScreen(),
         },
       ),
     );

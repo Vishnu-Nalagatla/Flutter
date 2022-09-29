@@ -25,10 +25,10 @@ class ProductItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
-            backgroundColor: Colors.black54,
-            // Using Consumer is really efficient if u want to render that single widget not the whole component.
-            leading: Consumer<Product>(builder: (ctx, dynamic, _) {
-              print("2222222222222222222");
+          backgroundColor: Colors.black54,
+          // Using Consumer is really efficient if u want to render that single widget not the whole component.
+          leading: Consumer<Product>(
+            builder: (ctx, dynamic, _) {
               return IconButton(
                 color: product.isFavorite ? Colors.red : Colors.white,
                 icon: Icon(
@@ -38,29 +38,39 @@ class ProductItem extends StatelessWidget {
                   product.toggleFavoriteStatus();
                 },
               );
-            }),
-            title: Text(
-              product.title,
-              textAlign: TextAlign.center,
+            },
+          ),
+          title: Text(
+            product.title,
+            textAlign: TextAlign.center,
+          ),
+          trailing: Card(
+            color: Colors.white,
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.shopping_cart),
+                  color: Theme.of(context).accentColor,
+                  onPressed: () {
+                    cart.addItem(product.id, product.title, product.price);
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("${product.title} added to cart"),
+                        action: SnackBarAction(
+                          label: "UNDO",
+                          onPressed: () {
+                            cart.removeSingleItem(product.id);
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-            trailing: Card(
-              color: Colors.white,
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.shopping_cart),
-                    color: Theme.of(context).accentColor,
-                    onPressed: () {
-                      cart.addItem(
-                        product.id,
-                        product.title,
-                        product.price,
-                      );
-                    },
-                  ),
-                ],
-              ),
-            )),
+          ),
+        ),
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(
