@@ -1,7 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:meals_app/categories/categories_screen.dart';
 import 'package:meals_app/categories_pdp/product_pdp.dart';
 import 'package:meals_app/categories_plp/categories_meals_screen.dart';
 import 'package:meals_app/categories_plp/meal.dart';
@@ -22,14 +20,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  List<Meal> _availableMeals = DUMMY_MEALS;
+  final List<Meal> _favoriteMeals = [];
   Map<String, bool> _filters = {
     "gluten": false,
     "vegetarian": false,
     "vegan": false,
     "lactoseFree": false,
   };
-  List<Meal> _availableMeals = DUMMY_MEALS;
-  List<Meal> _favoriteMeals = [];
 
   void _toggleFavorites(String mealId) {
     final existingIndex =
@@ -72,7 +70,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print(_favoriteMeals);
     return MaterialApp(
       // client: client,
       title: 'DeliMeals',
