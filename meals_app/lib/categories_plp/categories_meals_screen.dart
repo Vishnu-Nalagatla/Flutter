@@ -43,12 +43,6 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
     }
   }
 
-  void _removeMeals(String id) {
-    setState(() {
-      filteredMealData.removeWhere((meal) => meal.id == id);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     print("===>>> $categoryId  ${filteredMealData.length}");
@@ -59,13 +53,14 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
               title: Text(categoryTitle),
             ),
             body: ListView.builder(
-                itemCount: filteredMealData.length,
-                itemBuilder: (ctx, index) {
-                  return ProductCard(
-                    product: filteredMealData[index],
-                    // removeItem: _removeMeals,
-                  );
-                }),
+              itemCount: filteredMealData.length,
+              itemBuilder: (ctx, index) {
+                return ProductCard(
+                  product: filteredMealData[index],
+                  // removeItem: _removeMeals,
+                );
+              },
+            ),
           );
   }
 }
